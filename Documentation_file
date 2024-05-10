@@ -1,0 +1,46 @@
+Overview:
+This project generates random poems in the structure of Elizabeth Bishop’s famous poem One Art. Each word in the original poem  is replaced with a random word with the same part of speech from a cleaned_text containing many of Elizabeth Bishop's poems. So in a way, the code replaces her words with her words. Words that repeat in the original poem ex: the art of losing, the art of losing… are replaced with the SAME random words. Every time you run the code a new poem generates. 
+.
+1). In order to run my code the first step is to download the data you will clean. It is a pdf of Elizabeth Bishop’s poems. You can access it here as well as in the texts folder of my final_project in this repository. 
+https://www.slps.org/site/handlers/filedownload.ashx?moduleinstanceid=27607&dataid=22455&FileName=Elizabeth%20Bishop.pdf
+
+2). Then you must open the first python script which is called “download_clean_text.py” This python script will take the pdf and clean it when you run it. BUT FIRST, make sure you have these 3 things done.
+a). Please make sure you have re and PyPDF2 and downloaded. 
+ 
+b). For easiest use, please create the same directory as me: on your desktop create a folder called “final_project.” In this folder create two  folders: src and texts. Please place the pdf in your texts folder and  rename the PDF to Elizabeth_Bishop.pdf. Both python scripts  “download_clean_text.py”  and “create_a_poem.py” can be placed in the src. 
+
+c). Make sure that in the  “download_clean_text” script you edit the pdf_file_path in line 3.  As of now the file_path reflects my computer: (pdf_file_path="/Users/gracecook/Desktop/final_project/texts/Elizabeth_Bishop.pdf"). Please change it to reflect yours so that the pdf uploads and the cleaning will happen. 
+
+When this script is run it will save the cleaned text to the texts folder in your directory. It will be called “elizabeth_bishop_cleaned.txt.” (If you are not using the same directory please edit this to reflect yours). You can do so in line 31. 
+
+3). Please open the script called “create_a_poem.py.” Please make sure spacy and random are downloaded in python for you. Please also  go down to the cleaned_text_file_path (line 81) and change it so it reflects your device rather than mine and where your  “elizabeth_bishop_cleaned.txt.” is if it is somewhere different. 
+
+#4. When you make sure everything is correct you may run the script. It should output a different random poem each time in the structure of the poem in main. I wanted to focus on repetition, so while these poems may not be syntactically or semantically sound the words in the new poem are the same part of speech and  repetition occurs when the old poem repeats.
+ 
+A note about my test file:
+My test file is the final_project folder of my directory and that is reflected in how it is imported. When you run my test_file if the test_file exists elsewhere on your computer you have to change the importation. 
+
+My Code: 
+Functions 
+
+def get_tagged_tokens(text):
+
+description: this function takes in the cleaned Elizabeth Bishop PDF text and uses spacy in order to tag and tokenize every word in the text. So the outcome of this function would be a tuple of  every word ( also punctuation) and its part of speech. 
+
+arguments: text (this is the cleaned_text of the Elizabeth Bishop Pdf)
+
+returns: this returns a tuple of the word, pos of every word in the cleaned_text.
+
+def get_poem_tokens(poem_structure):
+
+description: this function is very similar to the function above. It takes in the poem in the main function and iterates over tagging and tokenizing each word. The outcome is tuples of (word,pos) for every word in the poem. It specifically filters out whitespace so that doesn’t turn into tokens 
+arguments: poem_structure (this is the original poem that is in the main function) 
+
+returns: this returns a tuple of word,pos for everything in the poem_structure
+
+def replace_words_with_random_words(tagged_tokens, poem_tokens,poem_structure):
+This function replaces words in the original poem with random words with the same POS. It does this by initializing an empty poem and then creating a dictionary that maps each word in the OG poem to the tagged lowercase form. For each word in each line it checks if it has already been replaced and then selects a random replacement word (from the dict). It does  no replacement if there is no matching POS. Finally it adjusts for the amount of words in each line to make sure that the new poem has the same amount of words. It then formats the lines into the full poem.
+
+arguments:  tagged_tokens(which is the cleaned text in tuples with word,pos) poem_tokens (which is tuples word,pos for every word in the poem) and poem_structure (which is the poem in main). 
+
+returns: this returns the new poem!
